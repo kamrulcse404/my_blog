@@ -1,0 +1,20 @@
+{
+    "name": "kamrul/myblog",
+    "autoload": {
+        "files": [
+            "helpers.php"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kamrulcse404",
+            "email": "kamrul.h01960@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.4"
+    }
+}
