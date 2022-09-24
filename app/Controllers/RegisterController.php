@@ -12,5 +12,10 @@ class RegisterController{
     public function register(){
         $user = new User();
         $user->save($_POST);
+
+        $_SESSION['is_user_logged_in'] = true;
+        $_SESSION['logged_in_user_name'] = htmlspecialchars($_POST['name']);
+
+        header('Location: /dashboard');
     }
 }

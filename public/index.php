@@ -1,9 +1,9 @@
 <?php
 session_start();
 
+use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
-use App\Controllers\LoginController;
 use App\Controllers\RegisterController;
 use App\Helpers\Database;
 
@@ -19,9 +19,9 @@ Database::loadConfig($dbConfig);
 $path = $_SERVER['PATH_INFO'] ?? '/';
 if ($path == '/login') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-        echo (new LoginController())->loginView();        
+        echo (new AuthController())->loginView();        
     }else {
-        echo (new LoginController())->login();        
+        echo (new AuthController())->login();        
     }
 }elseif ($path == '/register') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -31,6 +31,8 @@ if ($path == '/login') {
     }
 }elseif ($path == '/dashboard') {
     echo (new DashboardController())->index();
+}elseif ($path == '/logout') {
+    echo (new AuthController())->logout();
 }else{
     echo (new HomeController())->index();
 }

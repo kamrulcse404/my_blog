@@ -35,10 +35,6 @@ class Database
                 $password = self::$config['db_password'];
                 $db_name = self::$config['db_name'];
 
-                // var_dump(self::$config);
-                // exit;
-
-
                 $dsn = "mysql:host=$host;dbname=$db_name;charset=utf8mb4";
                 self::$instance = new PDO($dsn, $user, $password);
                 self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

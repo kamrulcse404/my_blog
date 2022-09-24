@@ -23,22 +23,19 @@ class User{
 
     public function save(array $user){
 
-        date_default_timezone_set('Asia/Dhaka');
-
-        $name = $user['name'];
+        $name = htmlspecialchars($user['name']);
+        $email = filter_var($user['email'], FILTER_VALIDATE_EMAIL);
         $userName = $user['user_name'];
-        $email = $user['email'];
-        $password = $user['password'];
+        $password = password_hash($user['password'], PASSWORD_BCRYPT);
 
-        $query = 'INSERT INTO users (full_name, email, uname, created_at,updated_at, pass) VALURS(:fname, :email, :userName, :created, :updated, :pass)';
+        $query = "INSERT INTO users (full_name, email, uname, pass) VALUES(:fname, :email, :userName, :pass)";
 
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(":fname", $name);
         $stmt->bindValue(":email", $email);
         $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":pass", password_hash($password, PASSWORD_BCRYPT));
-        $stmt->bindValue(":created", date('Y-m-d H:i:s'));
-        $stmt->bindValue(":updated", date('Y-m-d H:i:s'));
+        $stmt->bindValue(":pass",$password);
+
         return $stmt->execute();
     }
 }
