@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Helpers\Database;
-use PDO;
 
 class User{
     public $connection;
@@ -18,7 +17,7 @@ class User{
         $stmt = $this->connection->prepare($query);
         $stmt->bindValue(":userName", $username);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch($this->connection::FETCH_ASSOC);
     }
 
     public function save(array $user){

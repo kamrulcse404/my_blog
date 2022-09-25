@@ -24,7 +24,7 @@
                 </div>
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-outline-primary btn-sm">SignUp</button>
-                    <a href="#" class="btn btn-outline-primary d-left btn-sm">Back To Login</a>
+                    <a href="/login" class="btn btn-outline-primary d-left btn-sm">Back To Login</a>
                 </div>
             </form>
         </div>

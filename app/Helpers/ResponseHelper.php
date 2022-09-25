@@ -7,7 +7,7 @@ class ResponseHelper
     public static function renderView($view, $params = [])
     {
         foreach ($params as $key => $value) {
-            $$key = $value;
+            $key = $value;
         }
 
         ob_start();

@@ -18,7 +18,7 @@
                 </div>
                 <div class="form-group mt-2">
                     Don't you have an account?
-                    <a href="#">Register Here</a>
+                    <a href="/register">Register Here</a>
                 </div>
             </form>
         </div>
