@@ -11,15 +11,11 @@ class AuthController{
     }
 
     public function login(){
-        
-        header('Location:/dashboard');
+        $user = new User();
+
+        $user->login($_POST);
+
+        header('Location: /dashboard');
     }
 
-    public function logout(){
-
-        session_destroy();
-        header('Location:/login');
-
-        return "logout process is starting....";
-    }
 }

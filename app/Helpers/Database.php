@@ -16,7 +16,6 @@ class Database
 
     public static function loadConfig(array $config)
     {
-        // var_dump($config);exit;
         self::$config = $config;
     }
 

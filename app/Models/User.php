@@ -4,7 +4,8 @@ namespace App\Models;
 
 use App\Helpers\Database;
 
-class User{
+class User
+{
     public $connection;
 
     public function __construct()
@@ -12,29 +13,56 @@ class User{
         $this->connection = Database::getInstance();
     }
 
-    public function getUserByUserName($username){
-        $query = 'SELECT * FROM users WHERE user_name=:userName';
+    public function userValidationByUserName($userName)
+    {
+        $query = "SELECT * FROM users WHERE uname = :username";
         $stmt = $this->connection->prepare($query);
-        $stmt->bindValue(":userName", $username);
+        $stmt->bindValue(':username', $userName);
         $stmt->execute();
-        return $stmt->fetch($this->connection::FETCH_ASSOC);
+        $userN = $stmt->fetch($this->connection::FETCH_ASSOC);
+        return $userN;
     }
 
-    public function save(array $user){
+    public function save(array $user)
+    {
 
         $name = htmlspecialchars($user['name']);
         $email = filter_var($user['email'], FILTER_VALIDATE_EMAIL);
         $userName = $user['user_name'];
         $password = password_hash($user['password'], PASSWORD_BCRYPT);
 
-        $query = "INSERT INTO users (full_name, email, uname, pass) VALUES(:fname, :email, :userName, :pass)";
+        $userN = $this->userValidationByUserName($userName);
+        
+        if ($userN['uname'] === $userName) {
+            header('Location: /register');
+            // $_SESSION['user_register'] = 'User Name Already Exist';
+            exit;
+        }else {
+            $query = "INSERT INTO users (full_name, email, uname, pass) VALUES(:fname, :email, :userName, :pass)";
 
-        $stmt = $this->connection->prepare($query);
-        $stmt->bindValue(":fname", $name);
-        $stmt->bindValue(":email", $email);
-        $stmt->bindValue(":userName", $userName);
-        $stmt->bindValue(":pass",$password);
+            $stmt = $this->connection->prepare($query);
+            $stmt->bindValue(":fname", $name);
+            $stmt->bindValue(":email", $email);
+            $stmt->bindValue(":userName", $userName);
+            $stmt->bindValue(":pass", $password);
+            $stmt->execute();
+        }
+    }
 
-        return $stmt->execute();
+    public function login(array $user){
+
+        $uname = $user['user_name'];
+        $password = $user['user_password'];
+
+        $userN = $this->userValidationByUserName($uname);
+
+        if (password_verify($password, $userN['pass'])) {
+            // var_dump('hello');exit;
+            header('Location: /dashboard');
+        }
+        else {
+            header('Location: /login');
+            exit;
+        }
     }
 }

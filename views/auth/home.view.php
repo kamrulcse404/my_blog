@@ -1,3 +1,1 @@
-<?php
-
-echo "Welcome to my Todo Blog";
+<h3>Welcome to my Todo Blog</h3>

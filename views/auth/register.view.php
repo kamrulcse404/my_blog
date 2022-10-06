@@ -1,7 +1,7 @@
+
 <div class="col-8">
     <div class="card">
         <div class="card-body">
-            
             <div class="card-title">
                 <h4 class="text-center" style="color: #405e48;">User Registration Form</h4>
             </div>
@@ -20,7 +20,7 @@
                 </div>
                 <div class="form-group mt-2">
                     <label>Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="Enter your email" required>
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
                 </div>
                 <div class="form-group mt-2">
                     <button type="submit" class="btn btn-outline-primary btn-sm">SignUp</button>

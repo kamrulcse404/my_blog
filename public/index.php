@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
@@ -21,7 +21,7 @@ if ($path == '/login') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo (new AuthController())->loginView();        
     }else {
-        echo (new AuthController())->login();        
+        echo (new AuthController())->login();    
     }
 }elseif ($path == '/register') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -29,10 +29,11 @@ if ($path == '/login') {
     }else {
         echo (new RegisterController())->register();    
     }
-}elseif ($path == '/dashboard') {
-    echo (new DashboardController())->index();
-}elseif ($path == '/logout') {
-    echo (new AuthController())->logout();
+}
+elseif ($path == '/dashboard') {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        echo (new DashboardController())->deshboardView();        
+    }
 }else{
     echo (new HomeController())->index();
 }
