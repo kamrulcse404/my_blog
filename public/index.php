@@ -49,6 +49,8 @@ elseif ($path == '/dashboard') {
     }else {
         echo (new TodoController())->updateTodo();    
     }
+}elseif ($path == '/delete') {
+    echo (new TodoController())->onDelete();  
 }else{
     echo (new HomeController())->index();
 }

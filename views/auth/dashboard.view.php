@@ -1,7 +1,7 @@
 <div class="card">
     <div class="card-header">
         <h4 style="color: #405e48;">
-            <?php echo $_SESSION['name'] ?>'s todo List
+            <?php echo $_SESSION['name'] ?>'s Todo List
             <a href="/addTodo" class="btn btn-primary float-end">Add Todo</a>
         </h4>
     </div>
@@ -40,7 +40,9 @@
                                 <a href="/edit?id=<?= $post['id']; ?>" class="btn btn-primary">Edit</a>
                             </td>
                             <td>
-                                <a href="/delete?id=<?= $post['id']; ?>" class="btn btn-danger">Delete</a>
+                                <form method="post">
+                                    <a href="/delete?id=<?= $post['id']; ?>" class="btn btn-danger" type="submit">Delete</a>
+                                </form>
                             </td>
                         </tr>
                     <?php

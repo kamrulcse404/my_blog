@@ -64,4 +64,11 @@ class Post{
         $stmt->bindValue(':username', $userName);
         $stmt->execute();
     }
+
+    public function destroy($id){
+        // var_dump("hello");exit;
+        $query = "SELECT * FROM blogs WHERE id=$id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+    }
 }

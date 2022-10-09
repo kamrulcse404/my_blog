@@ -32,4 +32,12 @@ class TodoController {
         $update->update($_POST, $id);
         header('Location: /dashboard');
     }
+
+    public function onDelete(){
+        $id = $_REQUEST['id'];
+        // var_dump($id);exit;
+        $del = new Post();
+        $del->destroy($id);
+        // header('Location: /dashboard');
+    }
 }
