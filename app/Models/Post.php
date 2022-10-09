@@ -44,9 +44,24 @@ class Post{
         $query = "SELECT * FROM blogs WHERE id=$id";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
-        // $stmt->bindVAlue(":id", $id);
         $data = $stmt->fetch($this->connection::FETCH_ASSOC);
-        // var_dump($data);exit;
         return $data;
+    }
+
+    public function update(array $data, $id){
+        $title = $data['title'];
+        $details = $data['description'];
+        $status = $data['status'];
+        $author = $data['author'];
+        $userName = $_SESSION['username'];
+
+        $query = "UPDATE blogs SET title=:title, details=:details, completed=:completed, author=:author, user=:username WHERE id=$id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->bindValue(':title', $title);
+        $stmt->bindValue(':details', $details);
+        $stmt->bindValue(':completed', $status);
+        $stmt->bindValue(':author', $author);
+        $stmt->bindValue(':username', $userName);
+        $stmt->execute();
     }
 }

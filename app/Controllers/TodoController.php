@@ -27,6 +27,9 @@ class TodoController {
     }
 
     public function updateTodo(){
-
+        $update = new Post();
+        $id = $_REQUEST['id'];
+        $update->update($_POST, $id);
+        header('Location: /dashboard');
     }
 }
