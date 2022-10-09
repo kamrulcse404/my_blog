@@ -72,14 +72,4 @@ class User
             exit;
         }
     }
-
-    // public function userData($userName)
-    // {
-    //     $query = "SELECT * FROM users WHERE uname = :username";
-    //     $stmt = $this->connection->prepare($query);
-    //     $stmt->bindValue(':username', $userName);
-    //     $stmt->execute();
-    //     $data = $stmt->fetch($this->connection::FETCH_ASSOC);
-    //     return $data;
-    // }
 }

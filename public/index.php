@@ -43,6 +43,12 @@ elseif ($path == '/dashboard') {
     }else {
         echo (new TodoController())->addTodo();    
     }
+}elseif ($path == '/edit') {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        echo (new TodoController())->editView();         
+    }else {
+        echo (new TodoController())->updateTodo();    
+    }
 }else{
     echo (new HomeController())->index();
 }

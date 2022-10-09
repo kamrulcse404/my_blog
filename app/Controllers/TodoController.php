@@ -14,4 +14,19 @@ class TodoController {
 
         header('Location: /dashboard');
     }
+    
+    public function editView(){
+        return ResponseHelper::renderView('auth/edit', []);
+    }
+
+    public function editTodo(){
+        $id = $_REQUEST['id'];
+        $editData = new Post();
+        $result = $editData->getDataForEdit($id);
+        return $result;
+    }
+
+    public function updateTodo(){
+
+    }
 }

@@ -39,4 +39,14 @@ class Post{
 
         $stmt->execute();
     }
+
+    public function getDataForEdit($id){
+        $query = "SELECT * FROM blogs WHERE id=$id";
+        $stmt = $this->connection->prepare($query);
+        $stmt->execute();
+        // $stmt->bindVAlue(":id", $id);
+        $data = $stmt->fetch($this->connection::FETCH_ASSOC);
+        // var_dump($data);exit;
+        return $data;
+    }
 }
