@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use App\Helpers\Database;
@@ -12,39 +11,32 @@ class Post{
         $this->connection = Database::getInstance();
     }
 
-    // public function addPost(array $post){
+    public function getData(){
 
-    //     $title = $post['title'];
-    //     $detail = $post['details'];
-    //     $completed = $post['completed'];
-    //     $author = $post['author'];
-    //     $author = $post['username'];
-
-    //     $query = "INSERT INTO posts (title,	details, completed,	author,	user) VALUES(:title, :detail, :completed, :author, :username)";
-
-    //     $stmt = $this->connection->prepare($query);
-    //     $stmt->bindValue(":title", $title);
-    //     $stmt->bindValue(":detail", $detail);
-    //     $stmt->bindValue(":completed", $completed);
-    //     $stmt->bindValue(":author",$author);
-    //     return $stmt->execute();
-    // }
-
-    public function getUserByUserName(array $username){
-        $username = $username['user_name'];
-        // var_dump($username);exit;
-        $query = 'SELECT * FROM blogs WHERE user=:userName';
+        $query = "SELECT * FROM blogs WHERE user = :user";
         $stmt = $this->connection->prepare($query);
-        $stmt->bindValue(":userName", $username);
+        $stmt->bindValue(':user', $_SESSION['username']);
         $stmt->execute();
-
-        return $stmt->fetch($this->connection::FETCH_ASSOC);
+        $data = $stmt->fetchAll($this->connection::FETCH_ASSOC);
+        return $data;
     }
 
-    public function index(){
-        $query = "SELECT * FROM blogs";
+    public function save(array $postData){
+        $title = $postData['title'];
+        $details = $postData['description'];
+        $status = $postData['status'];
+        $author = $postData['author'];
+        $userName = $_SESSION['username'];
+
+        $query = "INSERT INTO blogs (title, details, completed, author, user) VALUES (:title, :details, :completed, :author, :userName)";
         $stmt = $this->connection->prepare($query);
-        $data = $stmt->execute();
-        return $data;
+
+        $stmt->bindValue(':title', $title);
+        $stmt->bindValue(':details', $details);
+        $stmt->bindValue(':completed', $status);
+        $stmt->bindValue(':author', $author);
+        $stmt->bindValue(':userName', $userName);
+
+        $stmt->execute();
     }
 }

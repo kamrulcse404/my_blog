@@ -1,1 +1,1 @@
-<h3>Welcome to my Todo Blog</h3>
+<h3 class="text-center">Welcome to User Todo Blog</h3>

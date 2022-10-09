@@ -32,12 +32,12 @@ class User
         $password = password_hash($user['password'], PASSWORD_BCRYPT);
 
         $userN = $this->userValidationByUserName($userName);
-        
+
         if ($userN['uname'] === $userName) {
             header('Location: /register');
             // $_SESSION['user_register'] = 'User Name Already Exist';
             exit;
-        }else {
+        } else {
             $query = "INSERT INTO users (full_name, email, uname, pass) VALUES(:fname, :email, :userName, :pass)";
 
             $stmt = $this->connection->prepare($query);
@@ -49,20 +49,37 @@ class User
         }
     }
 
-    public function login(array $user){
+    public function login(array $user)
+    {
 
         $uname = $user['user_name'];
+        
+        $stmt = $this->connection->prepare("SELECT * FROM users WHERE uname = :uname");
+        $stmt->bindValue(':uname', $uname);
+        $stmt->execute();
+        $result = $stmt->fetch($this->connection::FETCH_ASSOC);
         $password = $user['user_password'];
 
         $userN = $this->userValidationByUserName($uname);
 
         if (password_verify($password, $userN['pass'])) {
-            // var_dump('hello');exit;
+            // session_start();
+            $_SESSION['name'] = $result['full_name'];
+            $_SESSION['username'] = $result['uname'];
             header('Location: /dashboard');
-        }
-        else {
+        } else {
             header('Location: /login');
             exit;
         }
     }
+
+    // public function userData($userName)
+    // {
+    //     $query = "SELECT * FROM users WHERE uname = :username";
+    //     $stmt = $this->connection->prepare($query);
+    //     $stmt->bindValue(':username', $userName);
+    //     $stmt->execute();
+    //     $data = $stmt->fetch($this->connection::FETCH_ASSOC);
+    //     return $data;
+    // }
 }

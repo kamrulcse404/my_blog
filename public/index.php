@@ -1,10 +1,11 @@
 <?php
-// session_start();
+session_start();
 
 use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 use App\Controllers\HomeController;
 use App\Controllers\RegisterController;
+use App\Controllers\TodoController;
 use App\Helpers\Database;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -33,6 +34,14 @@ if ($path == '/login') {
 elseif ($path == '/dashboard') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo (new DashboardController())->deshboardView();        
+    }else {
+        echo (new DashboardController())->getAllTodo();    
+    }
+}elseif ($path == '/addTodo') {
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        echo (new TodoController())->addView();        
+    }else {
+        echo (new TodoController())->addTodo();    
     }
 }else{
     echo (new HomeController())->index();

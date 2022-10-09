@@ -10,10 +10,9 @@ class DashboardController{
         return ResponseHelper::renderView('auth/dashboard', []);
     }
 
-    // public function login(){
-    //     $post = new Post();
-    //     $posts = $post->getUserByUserName($_POST);
-    //     header('Location:/dashboard');
-    //     return $posts;
-    // }
+    public function getAllTodo(){
+        $data = new Post();
+        $userList = $data->getData();
+        return $userList;
+    }
 }

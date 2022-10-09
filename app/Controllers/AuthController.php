@@ -14,7 +14,7 @@ class AuthController{
         $user = new User();
 
         $user->login($_POST);
-
+        
         header('Location: /dashboard');
     }
 
