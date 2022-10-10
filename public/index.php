@@ -55,5 +55,4 @@ elseif ($path == '/dashboard') {
     echo (new HomeController())->index();
 }
 
-// route end
 

@@ -66,7 +66,6 @@ class Post{
     }
 
     public function destroy($id){
-        // var_dump("hello");exit;
         $query = "SELECT * FROM blogs WHERE id=$id";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
