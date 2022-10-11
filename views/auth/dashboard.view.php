@@ -40,8 +40,9 @@
                                 <a href="/edit?id=<?= $post['id']; ?>" class="btn btn-outline-primary">Edit</a>
                             </td>
                             <td>
-                                <form method="post">
-                                    <a href="/delete?id=<?= $post['id']; ?>" class="btn btn-outline-danger" type="submit">Delete</a>
+                                <form action="/dashboard" method="POST">
+                                    <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
+                                    <button type="submit" class="btn btn-outline-danger">Delete</button>
                                 </form>
                             </td>
                         </tr>

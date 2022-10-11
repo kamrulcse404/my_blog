@@ -66,7 +66,7 @@ class Post{
     }
 
     public function destroy($id){
-        $query = "SELECT * FROM blogs WHERE id=$id";
+        $query = "DELETE FROM blogs WHERE id=$id";
         $stmt = $this->connection->prepare($query);
         $stmt->execute();
     }

@@ -34,10 +34,9 @@ class TodoController {
     }
 
     public function onDelete(){
-        $id = $_REQUEST['id'];
-        // var_dump($id);exit;
+        $id = $_POST['id'];
         $del = new Post();
         $del->destroy($id);
-        // header('Location: /dashboard');
+        header('Location: /dashboard');
     }
 }

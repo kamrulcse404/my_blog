@@ -34,8 +34,8 @@ if ($path == '/login') {
 elseif ($path == '/dashboard') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         echo (new DashboardController())->deshboardView();        
-    }else {
-        echo (new DashboardController())->getAllTodo();    
+    }else{
+        echo (new TodoController())->onDelete();  
     }
 }elseif ($path == '/addTodo') {
     if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -49,8 +49,6 @@ elseif ($path == '/dashboard') {
     }else {
         echo (new TodoController())->updateTodo();    
     }
-}elseif ($path == '/delete') {
-    echo (new TodoController())->onDelete();  
 }else{
     echo (new HomeController())->index();
 }
